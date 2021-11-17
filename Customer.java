@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -19,53 +20,59 @@ public class Customer {
 		this.name = name;
 	}
 
-	public List<Rental> getRentals() {
-		return rentals;
+	public int getRentalsSize() {
+		return rentals.size();
 	}
 
-	public void setRentals(List<Rental> rentals) {
-		this.rentals = rentals;
+	public Rental getRental(int i) {
+		if(i < rentals.size()) {
+			return rentals.get(i);
+		} else {
+			return null;
+		}
 	}
 
 	public void addRental(Rental rental) {
 		rentals.add(rental);
+	}
 
+	public void clearRentals() {
+		rentals.clear();
 	}
 
 	public String getReport() {
 		String result = "Customer Report for " + getName() + "\n";
 
-		List<Rental> rentals = getRentals();
-
 		double totalCharge = 0;
 		int totalPoint = 0;
 
-		for (Rental each : rentals) {
+		for (int i = 0; i < getRentalsSize(); ++i) {
+			Rental each = getRental(i);
 			double eachCharge = 0;
 			int eachPoint = 0 ;
 			int daysRented = 0;
-
-			if (each.getStatus() == 1) { // returned Video
-				long diff = each.getReturnDate().getTime() - each.getRentDate().getTime();
+			long diff;
+			if (each.getStatus() == Rental.RentalStatus.Returned) { // returned Video
+				diff = each.getReturnDate().getTime() - each.getRentDate().getTime();
 			} else { // not yet returned
-				long diff = new Date().getTime() - each.getRentDate().getTime();
+				diff = new Date().getTime() - each.getRentDate().getTime();
 			}
 			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 
 			switch (each.getVideo().getPriceCode()) {
-			case Video.REGULAR:
+			case REGULAR:
 				eachCharge += 2;
 				if (daysRented > 2)
 					eachCharge += (daysRented - 2) * 1.5;
 				break;
-			case Video.NEW_RELEASE:
+			case NEW_RELEASE:
 				eachCharge = daysRented * 3;
 				break;
 			}
 
 			eachPoint++;
 
-			if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE) )
+			if ((each.getVideo().getPriceCode() == PriceCode.NEW_RELEASE) )
 				eachPoint++;
 
 			if ( daysRented > each.getDaysRentedLimit() )
