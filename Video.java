@@ -51,8 +51,4 @@ public abstract class Video {
 	public Date getRegisteredDate() {
 		return registeredDate;
 	}
-
-	public void setRegisteredDate(Date registeredDate) {
-		this.registeredDate = registeredDate;
-	}
 }
