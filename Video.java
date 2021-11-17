@@ -37,6 +37,13 @@ public abstract class Video {
 		return rented;
 	}
 
+	public boolean isRentedVideo(String videoTitle) {
+		if (videoTitle == title && isRented()) {
+			return true;
+		}
+		return false;
+	}
+
 	public void setRented(boolean rented) {
 		this.rented = rented;
 	}

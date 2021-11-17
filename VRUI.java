@@ -66,7 +66,7 @@ public class VRUI {
 
 		for (int i = 0; i < foundCustomer.getRentalsSize(); ++i) {
 			Rental rental = foundCustomer.getRental(i);
-			if ( rental.getVideo().getTitle().equals(videoTitle) && rental.getVideo().isRented() ) {
+			if ( rental.getVideo().isRentedVideo(videoTitle) ) {
 				rental.returnVideo();
 				rental.getVideo().setRented(false);
 				break ;
