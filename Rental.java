@@ -56,11 +56,10 @@ public class Rental {
 		int daysRented ;
 		if (getStatus() == RentalStatus.Returned) { // returned Video
 			long diff = returnDate.getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 		} else { // not yet returned
 			long diff = new Date().getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 		}
+		daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 		if ( daysRented <= 2) return limit ;
 
 		switch ( video.getVideoType() ) {
