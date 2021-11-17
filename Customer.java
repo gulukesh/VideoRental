@@ -109,7 +109,7 @@ public class Customer {
 	private int getDaysRented(Rental each) {
 		int daysRented;
 		long diff;
-		if (each.getStatus() == Rental.RentalStatus.Returned) { // returned Video
+		if (each.getStatus() == Rental.RentalStatus.RETURNED) { // returned Video
 			diff = each.getReturnDate().getTime() - each.getRentDate().getTime();
 		} else { // not yet returned
 			diff = new Date().getTime() - each.getRentDate().getTime();

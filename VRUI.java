@@ -38,17 +38,6 @@ public class VRUI {
 		String customerName = scanner.next() ;
 
 		Customer foundCustomer = customerManager.getCustomer(customerName);
-
-		return foundCustomer;
-	}
-
-
-
-	public void clearRentals() {
-		System.out.println("Enter customer name: ") ;
-		String customerName = scanner.next() ;
-
-		Customer foundCustomer = findCustomer(customerName) ;
 		if ( foundCustomer == null ) {
 			System.out.println("No customer found") ;
 		} else {
@@ -160,16 +149,11 @@ public class VRUI {
 		foundCustomer.addRental(rental);
 	}
 
-
-	public void register(String object) {
-		if ( object.equals("customer") ) {
-			System.out.println("Enter customer name: ") ;
-			String name = scanner.next();
-			customerManager.add(new Customer(name)) ;
-		}
-		else {
-			System.out.println("Enter video title to register: ") ;
-			String title = scanner.next() ;
+	public void registerCustomer() {
+		System.out.println("Enter customer name: ");
+		String name = scanner.next();
+		customerManager.add(new Customer(name));
+	}
 
 	public void registerVideo() {
 		System.out.println("Enter video title to register: ") ;
