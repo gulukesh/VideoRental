@@ -20,8 +20,16 @@ public class Customer {
 		this.name = name;
 	}
 
-	public List<Rental> getRentals() {
-		return Collections.unmodifiableList(rentals);
+	public int getRentalsSize() {
+		return rentals.size();
+	}
+
+	public Rental getRental(int i) {
+		if(i < rentals.size()) {
+			return rentals.get(i);
+		} else {
+			return null;
+		}
 	}
 
 	public void addRental(Rental rental) {
@@ -35,12 +43,11 @@ public class Customer {
 	public String getReport() {
 		String result = "Customer Report for " + getName() + "\n";
 
-		List<Rental> rentals = getRentals();
-
 		double totalCharge = 0;
 		int totalPoint = 0;
 
-		for (Rental each : rentals) {
+		for (int i = 0; i < getRentalsSize(); ++i) {
+			Rental each = getRental(i);
 			double eachCharge = 0;
 			int eachPoint = 0 ;
 			int daysRented = 0;
