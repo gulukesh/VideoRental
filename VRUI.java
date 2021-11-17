@@ -33,10 +33,7 @@ public class VRUI {
 		System.out.println("Bye");
 	}
 
-	public void clearRentals() {
-		System.out.println("Enter customer name: ") ;
-		String customerName = scanner.next() ;
-
+	private Customer findCustomer(String customerName) {
 		Customer foundCustomer = null ;
 		for ( Customer customer: customers ) {
 			if ( customer.getName().equals(customerName)) {
@@ -45,6 +42,16 @@ public class VRUI {
 			}
 		}
 
+		return foundCustomer;
+	}
+
+
+
+	public void clearRentals() {
+		System.out.println("Enter customer name: ") ;
+		String customerName = scanner.next() ;
+
+		Customer foundCustomer = findCustomer(customerName) ;
 		if ( foundCustomer == null ) {
 			System.out.println("No customer found") ;
 		} else {
@@ -64,13 +71,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = null ;
-		for ( Customer customer: customers ) {
-			if ( customer.getName().equals(customerName)) {
-				foundCustomer = customer ;
-				break ;
-			}
-		}
+		Customer foundCustomer = findCustomer(customerName) ;
 		if ( foundCustomer == null ) return ;
 
 		System.out.println("Enter video title to return: ") ;
@@ -131,13 +132,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = null ;
-		for ( Customer customer: customers ) {
-			if ( customer.getName().equals(customerName)) {
-				foundCustomer = customer ;
-				break ;
-			}
-		}
+		Customer foundCustomer = findCustomer(customerName) ;
 
 		if ( foundCustomer == null ) {
 			System.out.println("No customer found") ;
@@ -151,14 +146,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = null ;
-		for ( Customer customer: customers ) {
-			if ( customer.getName().equals(customerName)) {
-				foundCustomer = customer ;
-				break ;
-			}
-		}
-
+		Customer foundCustomer = findCustomer(customerName) ;
 		if ( foundCustomer == null ) return ;
 
 		System.out.println("Enter video title to rent: ") ;
