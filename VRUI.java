@@ -136,7 +136,7 @@ public class VRUI {
 
 		Video foundVideo = null ;
 		for ( Video video: videos ) {
-			if ( video.getTitle().equals(videoTitle) && video.isRented() == false ) {
+			if ( video.isRentedVideo(videoTitle) == false ) {
 				foundVideo = video ;
 				break ;
 			}
