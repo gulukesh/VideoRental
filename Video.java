@@ -1,34 +1,22 @@
 import java.util.Date;
 
-public class Video {
+public abstract class Video {
 	private String title ;
 
 	private PriceCode priceCode ;
 
-	private int videoType ;
-	public static final int VHS = 1 ;
-	public static final int CD = 2 ;
-	public static final int DVD = 3 ;
-
 	private Date registeredDate ;
 	private boolean rented ;
 
-	public Video(String title, int videoType, PriceCode priceCode, Date registeredDate) {
+	protected Video(String title, PriceCode priceCode, Date registeredDate) {
 		this.setTitle(title) ;
-		this.setVideoType(videoType) ;
 		this.setPriceCode(priceCode) ;
 		this.registeredDate = registeredDate ;
 	}
 
-	public int getLateReturnPointPenalty() {
-		int pentalty = 0 ;
-		switch ( videoType ) {
-			case VHS: pentalty = 1 ; break ;
-			case CD: pentalty = 2 ; break ;
-			case DVD: pentalty = 3 ; break ;
-		}
-		return pentalty ;
-	}
+	public abstract int getLateReturnPointPenalty();
+	public abstract int getLimitDays();
+
 	public PriceCode getPriceCode() {
 		return priceCode;
 	}
@@ -59,13 +47,5 @@ public class Video {
 
 	public void setRegisteredDate(Date registeredDate) {
 		this.registeredDate = registeredDate;
-	}
-
-	public int getVideoType() {
-		return videoType;
-	}
-
-	public void setVideoType(int videoType) {
-		this.videoType = videoType;
 	}
 }
