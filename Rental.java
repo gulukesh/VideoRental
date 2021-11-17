@@ -8,7 +8,7 @@ public class Rental {
 
 	public Rental(Video video) {
 		this.video = video ;
-		status = RentalStatus.Rented;
+		status = RentalStatus.RENTED;
 		rentDate = new Date() ;
 	}
 
@@ -25,14 +25,14 @@ public class Rental {
 	}
 
 	public void returnVideo() {
-		if (status == RentalStatus.Rented) {
+		if (status == RentalStatus.RENTED) {
 			changeToReturnedStatus();
 			returnDate = new Date() ;
 		}
 	}
 
 	public void changeToReturnedStatus() {
-		this.status = RentalStatus.Returned;
+		this.status = RentalStatus.RETURNED;
 	}
 
 	public Date getRentDate() {
@@ -54,7 +54,7 @@ public class Rental {
 	public int getDaysRentedLimit() {
 		int limit = 0 ;
 		int daysRented ;
-		if (getStatus() == RentalStatus.Returned) { // returned Video
+		if (getStatus() == RentalStatus.RETURNED) { // returned Video
 			long diff = returnDate.getTime() - rentDate.getTime();
 		} else { // not yet returned
 			long diff = new Date().getTime() - rentDate.getTime();
@@ -71,7 +71,7 @@ public class Rental {
 	}
 
 	enum RentalStatus {
-		Rented,
-		Returned
+		RENTED,
+		RETURNED
 	}
 }
