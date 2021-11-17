@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -20,16 +21,15 @@ public class Customer {
 	}
 
 	public List<Rental> getRentals() {
-		return rentals;
-	}
-
-	public void setRentals(List<Rental> rentals) {
-		this.rentals = rentals;
+		return Collections.unmodifiableList(rentals);
 	}
 
 	public void addRental(Rental rental) {
 		rentals.add(rental);
+	}
 
+	public void clearRentals() {
+		rentals.clear();
 	}
 
 	public String getReport() {
