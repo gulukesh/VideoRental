@@ -5,11 +5,9 @@ public class CustomerManager {
     private List<Customer> customers = new ArrayList<Customer>() ;
 
     public void add(Customer customer){
-
+        customers.add(customer);
     }
-    public void add(String customerName){
-
-    }
+    
     public void printCustomer() {
         for ( Customer customer: customers ) {
             System.out.println("Name: " + customer.getName() +
