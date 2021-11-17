@@ -7,7 +7,7 @@ public class Rental {
 	private Date returnDate ;
 
 	public Rental(Video video) {
-		this.video = video ;
+		this.video = video;
 		status = RentalStatus.RENTED;
 		rentDate = new Date() ;
 	}
@@ -21,10 +21,14 @@ public class Rental {
 	}
 
 	public void returnVideo() {
-		if (status == RentalStatus.RENTED) {
+		if (isRented()) {
 			changeToReturnedStatus();
 			returnDate = new Date() ;
 		}
+	}
+
+	private boolean isRented() {
+		return status == RentalStatus.RENTED;
 	}
 
 	public void changeToReturnedStatus() {
@@ -42,12 +46,11 @@ public class Rental {
 	public int getDaysRentedLimit() {
 		int limit = 0 ;
 		int daysRented ;
-		if (getStatus() == RentalStatus.RETURNED) { // returned Video
-			long diff = returnDate.getTime() - rentDate.getTime();
-		} else { // not yet returned
-			long diff = new Date().getTime() - rentDate.getTime();
+		if (isReturned()) {
+			daysRented = getDaysRented(rentDate.getTime(), returnDate.getTime());
+		} else {
+			daysRented = getDaysRented(rentDate.getTime(), new Date().getTime());
 		}
-		daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 		if ( daysRented <= 2) return limit ;
 
 		switch ( video.getVideoType() ) {
@@ -56,6 +59,17 @@ public class Rental {
 			case Video.DVD: limit = 2 ; break ;
 		}
 		return limit ;
+	}
+
+	private int getDaysRented(long from, long to) {
+		int daysRented;
+		long diff = to - from;
+		daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+		return daysRented;
+	}
+
+	private boolean isReturned() {
+		return this.status == RentalStatus.RETURNED;
 	}
 
 	enum RentalStatus {
