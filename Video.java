@@ -3,9 +3,7 @@ import java.util.Date;
 public class Video {
 	private String title ;
 
-	private int priceCode ;
-	public static final int REGULAR = 1 ;
-	public static final int NEW_RELEASE =2 ;
+	private PriceCode priceCode ;
 
 	private int videoType ;
 	public static final int VHS = 1 ;
@@ -15,7 +13,7 @@ public class Video {
 	private Date registeredDate ;
 	private boolean rented ;
 
-	public Video(String title, int videoType, int priceCode, Date registeredDate) {
+	public Video(String title, int videoType, PriceCode priceCode, Date registeredDate) {
 		this.setTitle(title) ;
 		this.setVideoType(videoType) ;
 		this.setPriceCode(priceCode) ;
@@ -31,11 +29,11 @@ public class Video {
 		}
 		return pentalty ;
 	}
-	public int getPriceCode() {
+	public PriceCode getPriceCode() {
 		return priceCode;
 	}
 
-	public void setPriceCode(int priceCode) {
+	public void setPriceCode(PriceCode priceCode) {
 		this.priceCode = priceCode;
 	}
 
