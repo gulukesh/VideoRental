@@ -69,6 +69,43 @@ public class Rental {
 		return this.status == RentalStatus.RETURNED;
 	}
 
+	int calculatePoint(int eachPoint, int daysRented) {
+		eachPoint++;
+
+		if ((getVideo().getPriceCode() == PriceCode.NEW_RELEASE) )
+			eachPoint++;
+
+		if ( daysRented > getDaysRentedLimit() )
+			eachPoint -= Math.min(eachPoint, getVideo().getLateReturnPointPenalty()) ;
+		return eachPoint;
+	}
+
+	double calculateCharge(double eachCharge, int daysRented) {
+		switch (getVideo().getPriceCode()) {
+		case REGULAR:
+			eachCharge += 2;
+			if (daysRented > 2)
+				eachCharge += (daysRented - 2) * 1.5;
+			break;
+		case NEW_RELEASE:
+			eachCharge = daysRented * 3;
+			break;
+		}
+		return eachCharge;
+	}
+
+	int getDaysRented() {
+		int daysRented;
+		long diff;
+		if (getStatus() == RentalStatus.RETURNED) { // returned Video
+			diff = getReturnDate().getTime() - getRentDate().getTime();
+		} else { // not yet returned
+			diff = new Date().getTime() - getRentDate().getTime();
+		}
+		daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+		return daysRented;
+	}
+
 	enum RentalStatus {
 		RENTED,
 		RETURNED
